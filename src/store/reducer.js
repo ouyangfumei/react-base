@@ -2,10 +2,7 @@ import * as ActionType from './action/actionType';
 
 const defaultState = {
     inputValue : 'input-init',
-    list:[
-        '早上4点起床，锻炼身体',
-        '中午下班游泳一小时'
-    ]
+    list:[]
 }; 
 export default (state = defaultState,action)=>{
     if(action.type === ActionType.CHANGE_INPUT){
@@ -26,6 +23,11 @@ export default (state = defaultState,action)=>{
         let newState = JSON.parse(JSON.stringify(state));
         newState.inputValue = 'input-del';
         newState.list.splice(action.index,1);
+        return newState
+    }
+    if(action.type === ActionType.GET_LIST){
+        let newState = JSON.parse(JSON.stringify(state));
+        newState.list = (action.value);
         return newState
     }
     return state

@@ -32,10 +32,20 @@ class Home extends Component<IProps, IState> {
         this.delBtn = this.delBtn.bind(this);
     } 
     componentDidMount(){  
-        axios.get('/mock') 
-            .then(res=>{
-            console.log(res.data.userinfo);
-        })
+        this.getData();
+    }
+    getData(){
+        // 未使用中间件thunk的写法
+        // axios.get('/mock') 
+        //     .then(res=>{
+        //     console.log(res.data.userinfo);
+        //     const resData = res.data.userinfo;
+        //     const action = ActionCreators.getListAction(resData);
+        //     store.dispatch(action);
+        // })
+        // 修改后，使用中间件的写法
+        const action = ActionCreators.getList();
+        store.dispatch(action);
     }
     changeInputValue(e: React.ChangeEvent<HTMLInputElement>){
         const action = ActionCreators.changeInputAction(e.target.value);
