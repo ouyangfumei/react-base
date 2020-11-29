@@ -44,3 +44,45 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## files and folders
+
+```
+|-- src(代码仓库)
+    |-- common(公用模块)
+    |-- core(公用核心代码)??？
+    |-- components(组件仓库)
+    |-- pages(路由页面以文件夹形式存在，命名方式驼峰法，最好与路由保持一致)
+        |-- index.html (web入口)
+        |-- index.js (js入口文件)
+    |-- routes(路由)
+    |-- less(样式文件，以组件/页面名字命名)
+        |-- app.less(公用样式)
+|-- dist(编译仓库)
+|-- static(静态资源仓库)
+    |-- asserts(资源)
+        |-- iconfont(字体icon)
+        |-- images(图片、icon)
+    |-- libs(第三方库)
+|-- less(样式文件，以 _ + 组件/页面名字命名)???
+    |-- components(组件样式)
+    |-- pages(页面样式)
+    |-- app.less(引入各个组件样式文件)
+    |-- theme.less(引入各个页面样式文件)
+|-- node_modules(node依赖包仓库)
+|-- webpack(webpack配置)????
+    |-- config.utils.js(公用配置)
+    |-- webpack.config.base.js(基础配置)
+    |-- webpack.config.dev.js(开发环境配置)
+    |-- webpack.config.prod.js(上线环境配置)
+|-- templates(Template Generator 模板仓库,插件地址：https://marketplace.visualstudio.com/itemdetails?itemName=prui.template-generator-vscode)
+    使用方式：装完插件右键目录就可以根据模板创建文件啦
+|-- .vscode(vscode配置,目前还未添加todo)
+    |-- setting.json(配置文件)
+|-- tsconfig.json(ts预编译配置文件)
+|-- package.json(yarn/npm依赖包配置文件)
+|-- script(node编译文件)
+    |-- build.js(生产环境编译)
+    |-- start.js(开发环境编译)
+    |-- test.js(测试环境编译)
+```
