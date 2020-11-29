@@ -18,7 +18,7 @@ export default class CommonApp extends Component<IProps, IState> {
         <div>
             <div>{this.state.title}</div>
             <ul>
-                <li> <Link to="/">首页1</Link> </li>
+                <li> <Link to="/">首页1？</Link> </li>
                 <li><Link to="/list/">列表</Link> </li>
             </ul>
         </div>

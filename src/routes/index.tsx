@@ -23,7 +23,7 @@ export default class AppRouter extends React.Component{
         return(
             <HashRouter>
                 <ul>
-                    <li> <Link to="/">首页1</Link> </li>
+                    <li> <Link to="/">首页home</Link> </li>
                     <li><Link to="/list">列表</Link> </li>
                 </ul>
                 <Switch>

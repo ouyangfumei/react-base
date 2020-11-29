@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { Input,Button } from 'antd';
 import store from '../../store';
 import * as ActionCreators from '../../store/action/actionCreators';
+import axios from 'axios';
+
 // redux的应用
 // 获取：store.getState()；
 // 修改 订阅storeChange subscribe
@@ -29,11 +31,14 @@ class Home extends Component<IProps, IState> {
         this.addBtn = this.addBtn.bind(this);
         this.delBtn = this.delBtn.bind(this);
     } 
+    componentDidMount(){  
+        axios.get('/mock') 
+            .then(res=>{
+            console.log(res.data.userinfo);
+        })
+    }
     changeInputValue(e: React.ChangeEvent<HTMLInputElement>){
-        // const action = {type:'changeInputValue',value:e.target.value};        
-        // store.dispatch(action);
         const action = ActionCreators.changeInputAction(e.target.value);
-        console.log(action)
         store.dispatch(action);
     }  
     storeChange(){
@@ -53,18 +58,21 @@ class Home extends Component<IProps, IState> {
         store.dispatch(action);
     }
     render() { 
-    return (  
-        <div>
-            <Input value={this.state.inputValue} onChange={this.changeInputValue}/>
-            <Button 
-                type="primary"
-                onClick={this.addBtn}
-            >增加</Button>
-            <Button 
-                type="primary"
-                onClick={this.delBtn}
-            >删除</Button>
-        </div> 
+        const {list} = this.state;
+        return (  
+            <div className="home">
+                <p>列表如下，增删改查</p>
+               <div className="input-center">
+                   <Input value={this.state.inputValue} onChange={this.changeInputValue}/>
+                   <Button 
+                    type="primary"
+                    onClick={this.addBtn}>
+                    增加</Button>
+                </div>
+                {list.length&&list.map((item,index)=>
+                    <p key={index}><span>{item}&nbsp;&nbsp;&nbsp;&nbsp;</span><span className="del" onClick={this.delBtn}>删除</span></p>
+                )}
+            </div> 
        );
     }
 }
