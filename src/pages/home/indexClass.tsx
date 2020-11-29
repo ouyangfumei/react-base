@@ -1,10 +1,13 @@
 
-import React,{useState,useEffect} from 'react';
+import React, { Component } from 'react';
 import { Input,Button } from 'antd';
 import store from '../../store';
 import * as ActionCreators from '../../store/action/actionCreators';
 import {connect} from 'react-redux';
 
+// redux的应用
+// 获取：store.getState()；
+// 修改 订阅storeChange subscribe
 interface IProps {
     inputValue: string,
     name: string;
@@ -18,16 +21,41 @@ interface IState {
     inputValue:string;
     list:Array<string>;
 }
-const Home =(props:IProps)=> {  
-        const [list,setList] = useState(props.list);
-        useEffect(()=>{
-            props.getData();
-        },[list]);
-        const {inputValue,changeInputValue,delBtn,addBtn} = props;
-        console.log(list,'list');
+// state
+class Home extends Component<IProps, IState> {
+    constructor(props: IProps) {
+        super(props);
+        // 未使用react-redux
+        // const storeData = store.getState();
+        // const inputValue = storeData.inputValue;
+        // const list = storeData.list;
+        // 使用react-redux
+        const {inputValue,list} = this.props;
+        // this.state = {
+        //     inputValue:'',
+        //     list:[]
+        // };
+        // ---修改store 订阅Redux的状态
+        // this.storeChange = this.storeChange.bind(this);
+        // store.subscribe(this.storeChange);
+        // ---
+    } 
+    componentDidMount(){  
+        this.props.getData();
+    }
+    // storeChange(){
+    //     console.log(store.getState());
+    //     const storeData = store.getState();
+    //     this.setState({
+    //         inputValue:storeData.inputValue,
+    //         list:storeData.list
+    //     })
+    // }   
+    render() { 
+        const {inputValue,list,changeInputValue,delBtn,addBtn} = this.props;
         return (  
             <div className="home">
-                <p>列表如下，增删改查(使用useState和react-redux结合，但是失败了！)</p>
+                <p>列表如下，增删改查</p>
                <div className="input-center">
                    <Input value={inputValue} onChange={changeInputValue}/>
                    <Button 
@@ -40,8 +68,11 @@ const Home =(props:IProps)=> {
                 )}
             </div> 
        );
+    }
 }
+// export default Home;
 
+// react-redux的使用
 const stateToProps = (state:IState)=>{
     return{
         inputValue:state.inputValue,

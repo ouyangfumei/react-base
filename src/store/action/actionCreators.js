@@ -23,7 +23,7 @@ export const getList = ()=>{
         axios.get('/mock') 
             .then(res=>{
             const resData = res.data.userinfo;
-            const action = getListAction(resData)
+            const action = getListAction(resData);
             dispatch(action)
         })
     }
