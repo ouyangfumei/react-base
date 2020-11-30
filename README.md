@@ -1,3 +1,9 @@
+
+## start 
+npm run start
+建议使用node版本 v12.18.x
+
+##  目录说明
 ```
 |-- config(webpack打包配置)
 |-- dist(编译仓库)
