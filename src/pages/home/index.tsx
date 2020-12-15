@@ -6,20 +6,20 @@ import store from '../../store'
 import * as ActionCreators from '../../store/action/actionCreators'
 import {connect} from 'react-redux'
 
-interface IProps {
-    inputValue: string
-    name: string
-    list: Array<string>
-    changeInputValue: any
-    getData: any
-    addBtn: any
-    delBtn: any
-}
+// interface IProps {
+//     inputValue: string
+//     name: string
+//     list: Array<string>
+//     changeInputValue: any
+//     getData: any
+//     addBtn: any
+//     delBtn: any
+// }
 interface IState {
     inputValue: string
     list: Array<string>
 }
-const Home = (props: IProps) => {
+const Home = (props: any) => {
     const [list, setList] = useState(props.list)
     useEffect(() => {
         props.getData()
@@ -28,7 +28,7 @@ const Home = (props: IProps) => {
     console.log(list, 'list')
     return (
         <div className="home">
-            <p>列表如下，增删改查(使用useState和react-redux结合，但是失败了！)</p>
+            <p>列表如下，增删改查(使用useState和react-redux结合，但是失败了2111!！)</p>
             <div className="input-center">
                 <Input value={inputValue} onChange={changeInputValue} />
                 <Button type="primary" onClick={addBtn}>
@@ -36,7 +36,7 @@ const Home = (props: IProps) => {
                 </Button>
             </div>
             {list.length &&
-                list.map((item, index) => (
+                list.map((item: any, index: number) => (
                     <p key={index}>
                         <span>{item}&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         <span className="del" onClick={delBtn}>

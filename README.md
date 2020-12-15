@@ -50,3 +50,5 @@
 |-- packageJson.md(yarn/npm依赖包配置说明文件)
 |-- README.md(项目说明文件)
 ```
+
+ --progress --watch --colors --profile
