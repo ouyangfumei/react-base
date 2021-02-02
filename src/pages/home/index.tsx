@@ -1,7 +1,9 @@
 /** @format */
 
 import React, {useState, useEffect} from 'react'
+// import {Input, Button} from 'antd'
 import {Input, Button} from 'antd'
+import 'antd/dist/antd.css'
 import store from '../../store'
 import * as ActionCreators from '../../store/action/actionCreators'
 import {connect} from 'react-redux'

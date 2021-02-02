@@ -1,0 +1,137 @@
+一.为啥不用umi+dva，而是用官网create-react-app去搭建呢？
+umi、create-react-app都是企业级 react 应用框架，umi相对于功能会全一点，但是create-react-app也是够用的；
+dva： dva 首先是一个基于 redux 和 redux-saga 的数据流方案，然后为了简化开发体验，dva 还额外内置了 react-router 和 fetch，所以也可以理解为一个轻量级的应用框架。--- 来自官方。
+优点:很明显，umi+dva开箱即用，省去了很多框架搭建和思考的时间
+缺点：也很明显，学习成本提高，文档不完善也是一方面，后期项目维护成本高，二次封装后，后期如果出现bug改起来没那么容易、方便、灵活。
+建议：使用官方推荐的来，减少学习成本、使用灵活、后期维护成本低。
+https://www.zhihu.com/question/336798290
+
+1.项目搭建（ts）
+1.1创建 
+	npm install -g create-react-app
+	create-react-app 你的项目名 --typescript  （ts环境：https://blog.csdn.net/weixin_36445197/article/details/108101646）
+1.2复制出相关的配置文件（webpack）npm run eject
+1.3对package包分析？
+1.4配置eslint+Prettier格式化代码
+https://segmentfault.com/a/1190000019661168
+https://segmentfault.com/a/1190000019896962
+配置中已近下载了如下：npm i eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --save
+还需下载：npm i prettier eslint-config-prettier eslint-plugin-prettier --save
+创建.eslintrc.js .prettierrc.js
+.eslintrc.js：
+/** @format */
+
+module.exports = {
+    parser: '@typescript-eslint/parser',
+    extends: ['prettier/@typescript-eslint', 'plugin:prettier/recommended'],
+    settings: {
+        react: {
+            pragma: 'React',
+            version: 'detect',
+        },
+    },
+    parserOptions: {
+        ecmaVersion: 2019,
+        sourceType: 'module',
+        ecmaFeatures: {
+            jsx: true,
+        },
+    },
+    env: {
+        browser: true,
+        node: true,
+    },
+}
+.prettierrc.js：
+module.exports =  {
+   "endOfLine": "auto",
+    "printWidth": 120,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "bracketSpacing": false,
+    "jsxBracketSameLine": true,
+    "arrowParens": "avoid",
+    "insertPragma": true,
+    "tabWidth": 4,
+    "useTabs": false  
+  };
+vscode需要安装ESLint、prettier插件
+配置vscode settings的eslint
+{
+    "eslint.enable": true, //是否开启vscode的eslint
+    "eslint.autoFixOnSave": true, //是否在保存的时候自动fix eslint
+    "eslint.options": { //指定vscode的eslint所处理的文件的后缀
+        "extensions": [
+            ".js",
+            ".vue",
+            ".ts",
+            ".tsx"
+        ]
+    },
+    "eslint.validate": [ //确定校验准则
+        "javascript",
+        "javascriptreact",
+        {
+            "language": "html",
+            "autoFix": true
+        },
+        {
+            "language": "vue",
+            "autoFix": true
+        },
+        {
+            "language": "typescript",
+            "autoFix": true
+        },
+        {
+            "language": "typescriptreact",
+            "autoFix": true
+        }
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "eslint.codeAction.showDocumentation": {
+    
+        "enable": true
+    }
+}
+
+2.路由的引入
+2.1引入路由npm install --save react-router-dom
+2.2编写路由文件，其中用到react-loadable代码分割
+npm install --save-dev @centarius/react-loadable
+
+
+3.antdesign的引入
+3.1安装：npm install antd --save
+3.2引入：全局或者单个组件中引入css和组件，eg：
+import 'antd/dist/antd.css'
+import { Input , Button } from 'antd'
+
+
+4.状态管理的引入
+4.1安装redux：npm install --save redux
+4.2安装react-redux，为了使用Provider组件，provider包裹在根组件外层，使所有的子组件都可以拿到state
+4.3创建store仓库、reducer仓库值改变更新管理、action改变仓库值行动的文件、dispatch()方法传递给store
+4.4在组件中调用
+import store from '../../store';
+const storeData = store.getState();
+4.5和axios一起用，先下载axios npm i --save axios npm;install mockjs --save-dev
+4.6安装中间件redux-thunk在实际工作中你可以使用中间件来进行日志记录、创建崩溃报告，调用异步接口或者路由
+npm install --save redux-thunk
+4.7react-redux的使用（Provider和connect）
+Provider是一个提供器，只要使用了这个组件，组件里边的其它所有组件都可以使用store了
+connect的作用是把UI组件（无状态组件）和业务逻辑代码的分开，然后通过connect再链接到一起，让代码更加清晰和易于维护。这也是React-Redux最大的有点。
+
+
+5.less配置：该脚手架下只有sass没有less的相关配置，需要自己配置
+npm install less less-loader --save
+在webpack中配置好即可（和sass配置法一致）
+
+
+二.pxtorem
+px-to-rem-loader?
+postcss-flexbugs-fixes作用
+
