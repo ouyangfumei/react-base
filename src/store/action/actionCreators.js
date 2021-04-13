@@ -11,6 +11,7 @@ export const changeInputAction = value => ({
 export const addItemAction = () => ({
     type: ActionType.ADD_ITEM,
 })
+// add1
 export const deleteItemAction = index => ({
     type: ActionType.DELETE_ITEM,
     index,
